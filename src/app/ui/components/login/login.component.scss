@@ -1,0 +1,15 @@
+.login-buttons {
+    display: flex; /* Flexbox kullanarak içerikleri yan yana hizala */
+    align-items: center; /* Dikey yönde hizalamayı ortala */
+  }
+
+  .asl-google-signin-button,
+img {
+  width: 33px; /* İstediğiniz genişliği ayarlayın */
+  height: 33px; /* İstediğiniz yüksekliği ayarlayın */
+  margin-left: 6px;
+}
+
+.col-md-6 {
+    margin-top: 50px; /* İstediğiniz boşluğu ayarlayın */
+  }
