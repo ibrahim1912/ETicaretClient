@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 
 
+
 @NgModule({
   declarations: [
     CustomersComponent
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule.forChild([
       {path:"",component:CustomersComponent},
-    ])
+    ]),
+    
   ]
 })
 export class CustomersModule { }
