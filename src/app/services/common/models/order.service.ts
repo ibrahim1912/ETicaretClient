@@ -3,6 +3,8 @@ import { HttpClientService } from '../http-client.service';
 import { Create_Order } from 'src/app/contracts/order/create_order';
 import { Observable, firstValueFrom } from 'rxjs';
 import { List_Order } from 'src/app/contracts/order/list_order';
+import { Single_Order } from 'src/app/contracts/order/single_order';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +34,40 @@ export class OrderService {
     .catch(error => errorCallBack(error));
 
     return await promiseData
+  }
+
+  // async getByIdOrder(id:string,successCallBack?: () => void, errorCallBack?: (errorMessage :string) => void)
+  // {
+  //   const observable:Observable<Single_Order> = this.httpClientService.get<Single_Order>({
+  //     controller: "orders",
+      
+  //   },id)
+
+  //   const promiseData = firstValueFrom(observable);
+  //   promiseData.then(value => successCallBack()) 
+  //   //  .catch(error =>{
+  //   //   console.error('XXXX:', error);
+  //   //   errorCallBack(error);
+  //   //  })   
+
+  //   // promiseData.then(d=> successCallBack())
+  //   // .catch((errorResponse: HttpErrorResponse) => errorCallBack(errorResponse.message))
+
+    
+  // return await promiseData;
+    
+  // }
+
+
+  async getByIdOrder(id: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void) {
+    const observable: Observable<Single_Order> = this.httpClientService.get<Single_Order>({
+      controller: "orders"
+    }, id);
+
+    const promiseData = firstValueFrom(observable);
+    // promiseData.then(value => successCallBack())
+    //   .catch(error => errorCallBack(error))
+
+    return await promiseData;
   }
 }
