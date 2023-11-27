@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent } from 'src/app/base/base.component';
 import { Create_User } from 'src/app/contracts/users/create-user';
@@ -16,6 +17,7 @@ export class RegisterComponent extends BaseComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private userService:UserService,
     private toastrService:CustomToastrService,
+    private router:Router,
     spinner:NgxSpinnerService) {
       super(spinner)
      }
@@ -76,6 +78,8 @@ export class RegisterComponent extends BaseComponent implements OnInit {
         messageType:ToastrMessageType.Success,
         positon:ToastrPosition.BottomRight
       });
+
+      this.router.navigate(["/login"])
     }else{
       this.toastrService.message(result.message, "Kullancı kaydı hatası", {
         messageType:ToastrMessageType.Error,

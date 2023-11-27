@@ -1,0 +1,11 @@
+.btn-outline-custom {
+    background-color: rgb(255, 255, 255);
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-outline-custom:hover {
+    background-color: rgb(0, 51, 102);
+    color: rgb(0, 204, 153);
+    border-color: rgb(0, 51, 102); /* Çerçeve rengi */
+}

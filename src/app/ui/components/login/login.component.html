@@ -24,10 +24,15 @@
           </div>
        
         <br>
-        <button type="submit" class="btn btn-primary" 
+        <button type="submit" class="btn custom-btn" style="font-size: small"
         (click)="login(txtUserNameOrEmail.value,txtPassword.value)">
             Giriş Yap
         </button> 
+
+        <a   class="btn custom-btn" style=" font-size: small; margin-left: 8px;"
+        routerLink="/password-reset"  > 
+           Şifremi Unuttum
+        </a> 
 
     
     </div>
