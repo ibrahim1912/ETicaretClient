@@ -1,8 +1,15 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { BaseDialog } from '../base/base-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { OrderService } from 'src/app/services/common/models/order.service';
 import { Single_Order } from 'src/app/contracts/order/single_order';
+import { DialogService } from 'src/app/services/common/dialog.service';
+import { CompleteOrderDailogComponent, CompleteOrderState } from '../complete-order-dailog/complete-order-dailog.component';
+import { async } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { NgxSpinerType } from 'src/app/base/base.component';
+import { ToastrService } from 'ngx-toastr';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
 
 
 @Component({
@@ -16,6 +23,9 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
     dialogRef: MatDialogRef<OrderDetailDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: OrderDetailDialogDeleteState | string,
     private orderService:OrderService,
+    private dialogService:DialogService,
+    private spinner:NgxSpinnerService,
+    private toastrService:CustomToastrService
   ) {
     super(dialogRef);
   }
@@ -26,9 +36,6 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
   dataSource = [];
   clickedRows = new Set<any>();
   totalPrice:number;
-  dataSource1=[]
-  dataSource2 = []
-
    
 
   async  ngOnInit()   {
@@ -38,6 +45,25 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
     this.totalPrice = this.singleOrder.basketItems
         .map((basketItem,index) => basketItem.price * basketItem.quantity)
         .reduce((price,current) => price + current);
+  }
+
+  completeOrder(){
+    this.dialogService.openDialog({
+      componentType:CompleteOrderDailogComponent,
+      data:CompleteOrderState.Yes,
+      afterClosed: async ()=>{
+        this.spinner.show(NgxSpinerType.BallAtom)
+        await this.orderService.completeOrder(this.data as string)
+        this.spinner.hide(NgxSpinerType.BallAtom)
+        this.toastrService.message("Sipariş başarıyla tamamlanmıştır! Müşteriye bilgi verilmiştir." ,"Sipariş tamamlandı!",{
+          messageType:ToastrMessageType.Success,
+          positon:ToastrPosition.BottomRight
+        });
+
+        window.location.reload();
+        
+      }
+    });
   }
 }
 
@@ -51,3 +77,7 @@ export enum OrderDetailDialogDeleteState {
 
 
  
+function output(): (target: OrderDetailDialogComponent, propertyKey: "completed") => void {
+  throw new Error('Function not implemented.');
+}
+

@@ -27,7 +27,7 @@ export class ListComponent extends BaseComponent implements OnInit  {
   }
 
   displayedColumns: string[] = ['orderCode', 'userName', 'totalPrice', 'createdDate',
-  'viewDetail','delete'];
+  'completed','viewDetail','delete'];
 
   dataSource:MatTableDataSource<List_Order> = null
 
@@ -36,6 +36,7 @@ export class ListComponent extends BaseComponent implements OnInit  {
 
   async getOrders() {
     this.showNgxSpinner(NgxSpinerType.BallAtom);
+    debugger
     const allOrders :{totalOrderCount:number; orders:List_Order[]} = await 
       this.orderService.getAllOrders(this.paginator ? this.paginator.pageIndex : 0,
       this.paginator ? this.paginator.pageSize : 5, () => this.hideNgxSpinner(NgxSpinerType.BallAtom), errorMessage => 
@@ -47,15 +48,18 @@ export class ListComponent extends BaseComponent implements OnInit  {
 
     this.dataSource = new MatTableDataSource<List_Order>(allOrders.orders);
     this.paginator.length=allOrders.totalOrderCount;
+   
   
   }
 
   async pageChanged(){
     await this.getOrders();
+     
   }
 
   async ngOnInit() {
     await this.getOrders();
+    
   }
 
   showDetail(id:string){

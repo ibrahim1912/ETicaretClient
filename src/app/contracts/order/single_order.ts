@@ -5,6 +5,7 @@ export class Single_Order{
     address:string;
     createdDate:Date;
     basketItems:any[];
+    completed:boolean;
 }
 
 
