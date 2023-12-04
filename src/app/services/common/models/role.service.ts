@@ -10,19 +10,19 @@ export class RoleService {
 
   constructor(private httpClientService:HttpClientService) { }
 
-  async getRoles(page: number=0, size:number =5,successCallBack? : () => void, errorCallBack?: (errorMessage :string) => void)
-  :Promise<{  datas:List_Role[],totalCount:number}>{
-    const observable:Observable<{ datas:List_Role[],totalCount:number}> = this.httpClientService.get({
-      controller:"roles",
-      queryString : `page=${page}&size=${size}`
-    });
+  // async getRoles(page: number, size:number ,successCallBack? : () => void, errorCallBack?: (errorMessage :string) => void)
+  // {
+  //   const observable:Observable<any> = this.httpClientService.get({
+  //     controller:"roles",
+  //     queryString : `page=${page}&size=${size}`
+  //   });
  
-    const promiseData = firstValueFrom(observable);
-    promiseData.then(value => successCallBack())
-    .catch(error => errorCallBack(error));
+  //   const promiseData = firstValueFrom(observable);
+  //   promiseData.then(value => successCallBack())
+  //   .catch(error => errorCallBack(error));
     
-    return await promiseData;
-  }
+  //   return await promiseData;
+  // }
 
   async create(name:string , successCallBack? :() => void,errorCallBack?:(error)=> void){
     const observable:Observable<any> = this.httpClientService.post({
@@ -36,4 +36,17 @@ export class RoleService {
     return await promiseData as {succeeded:boolean};
   }
 
+  async getRoles(page: number, size:number ,successCallBack? : () => void, errorCallBack?: (errorMessage :string) => void)
+  :Promise<{datas:List_Role[],totalCount:number; }>{
+    const observable:Observable< {datas:List_Role[],totalCount:number; } > = this.httpClientService.get({
+      controller:"roles",
+      queryString : `page=${page}&size=${size}`
+    });
+ 
+    const promiseData = firstValueFrom(observable);
+    promiseData.then(value => successCallBack())
+    .catch(error => errorCallBack(error));
+    
+    return await promiseData;
+  }
 }
