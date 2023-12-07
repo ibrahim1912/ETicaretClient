@@ -4,6 +4,7 @@ import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, NgxSpinerType } from 'src/app/base/base.component';
 import {  List_Product } from 'src/app/contracts/list_product';
+import { QrcodeDialogComponent } from 'src/app/dialogs/qrcode-dialog/qrcode-dialog.component';
 import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
@@ -27,13 +28,14 @@ export class ListComponent  extends BaseComponent implements OnInit {
   }
 
   displayedColumns: string[] = ['name', 'price', 'stock', 'createdDate',
-  'updatedDate','photos','edit','delete'];
+  'updatedDate','photos','qrcode','edit','delete'];
   dataSource:MatTableDataSource<List_Product> = null
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   async getProducts( ) {
     this.showNgxSpinner(NgxSpinerType.BallAtom);
+    
     const allProducts :{totalProductCount:number; products:List_Product[]} = await this.productService.read(this.paginator ? this.paginator.pageIndex : 0,
       this.paginator ? this.paginator.pageSize : 5, () => this.hideNgxSpinner(NgxSpinerType.BallAtom), errorMessage => 
         this.alertify.message(errorMessage,{
@@ -44,7 +46,7 @@ export class ListComponent  extends BaseComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
     this.paginator.length=allProducts.totalProductCount;
-  
+  console.log(allProducts.totalProductCount)
   }
 
   // delete(id:string,event){
@@ -65,9 +67,20 @@ export class ListComponent  extends BaseComponent implements OnInit {
 
   async pageChanged(){
     await this.getProducts();
+     
   }
 
   async ngOnInit() {
     await this.getProducts();
+     
+  }
+
+  showQRCode(productId:string){
+    this.dialogService.openDialog({
+      componentType:QrcodeDialogComponent,
+      data:productId,
+      afterClosed:() => {},
+     
+    });
   }
 }

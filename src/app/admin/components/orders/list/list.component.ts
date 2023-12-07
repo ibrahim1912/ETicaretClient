@@ -36,11 +36,10 @@ export class ListComponent extends BaseComponent implements OnInit  {
 
   async getOrders() {
     this.showNgxSpinner(NgxSpinerType.BallAtom);
-    debugger
     const allOrders :{totalOrderCount:number; orders:List_Order[]} = await 
       this.orderService.getAllOrders(this.paginator ? this.paginator.pageIndex : 0,
-      this.paginator ? this.paginator.pageSize : 5, () => this.hideNgxSpinner(NgxSpinerType.BallAtom), errorMessage => 
-      this.alertify.message(errorMessage,{
+      this.paginator ? this.paginator.pageSize : 5, () => this.hideNgxSpinner(NgxSpinerType.BallAtom), (errorMessage:any) => 
+      this.alertify.message(errorMessage.message,{
           dismissOthers:true,
           messageType:MessageType.Error,
           position:Position.BottomRight

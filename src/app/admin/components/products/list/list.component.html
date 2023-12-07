@@ -33,16 +33,23 @@
 
       <ng-container matColumnDef="photos">
         <th  style="width: 25;" mat-header-cell *matHeaderCellDef></th>
-        <td style="padding-left: 2%;" mat-cell *matCellDef="let element">
+        <td style="padding-left: 2.3%;" mat-cell *matCellDef="let element">
            <img style="cursor: pointer;" 
            (click)="addProductImages(element.id)"
             src="../../../../../assets/resim-logo-color.png" 
           width="20" height="20"> </td>
       </ng-container>
 
+      <ng-container matColumnDef="qrcode">
+        <th  style="width: 25;" mat-header-cell *matHeaderCellDef></th>
+        <td style="padding-left: 2.3%;" mat-cell *matCellDef="let element"> <img style="cursor: pointer;" 
+           src="../../../../../assets/qrcode.png" 
+          width="20" height="20" (click)="showQRCode(element.id)"> </td>
+      </ng-container>
+
       <ng-container matColumnDef="edit">
         <th  style="width: 25;" mat-header-cell *matHeaderCellDef></th>
-        <td style="padding-left: 2%;" mat-cell *matCellDef="let element"> <img style="cursor: pointer;"  src="../../../../../assets/edit.png" 
+        <td style="padding-left: 2.3%;" mat-cell *matCellDef="let element"> <img style="cursor: pointer;"  src="../../../../../assets/edit.png" 
           width="20" height="20"> </td>
       </ng-container>
     
