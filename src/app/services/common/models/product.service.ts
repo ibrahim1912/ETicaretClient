@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { List_Product } from 'src/app/contracts/list_product';
 import { Observable, firstValueFrom } from 'rxjs';
 import { List_Product_Image } from 'src/app/contracts/list_product_image';
+import { Single_Product } from 'src/app/contracts/single_product';
 
 @Injectable({
   providedIn: 'root'
@@ -93,4 +94,56 @@ export class ProductService {
       await firstValueFrom(changeShowcaseImageObservable);
       successCallBack();
   }
+
+  async updateStockQrCodeToProduct(productId:string, stock:number, successCallBack?: () => void) :
+  Promise<void>{
+    const observable = this.httpClientService.put({
+      controller:"products",
+      action:"qrcode",
+    },{
+      productId, stock
+    });
+    await firstValueFrom(observable);
+    successCallBack();
+  }
+
+  async updateProduct(single_product:Single_Product, successCallBack?: () => void,errorCallBack?: (errorMessage :string) => void) :
+  Promise<void>{
+    const observable = this.httpClientService.put({
+      controller:"products",
+      action:"update-product",
+    },{
+      single_product
+    });
+
+    await firstValueFrom(observable);
+    successCallBack();
+  }
+
+  async updateProduct2(id:string,name:string,stock:number,price:number, successCallBack?: () => void,errorCallBack?: (errorMessage :string) => void) :
+  Promise<void>{
+    const observable = this.httpClientService.put({
+      controller:"products",
+      action:"update-product",
+    },{
+      id:id,name:name,price:price,stock:stock
+    });
+    
+    await firstValueFrom(observable);
+    successCallBack();
+  }
+
+  async getProductById(id:string,successCallBack? : () => void, errorCallBack?: (errorMessage :string) => void) {
+   const observable : Observable<Single_Product> =  
+    this.httpClientService.get<Single_Product>({
+      controller:"products",
+       
+    },id);
+
+    const promiseData = firstValueFrom(observable);
+
+    return await promiseData;
+  }
 }
+ 
+ 
