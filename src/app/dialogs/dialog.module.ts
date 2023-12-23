@@ -23,6 +23,8 @@ import { MatInputModule } from '@angular/material/input';
 import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 import { UpdateProductDialogComponent } from './update-product-dialog/update-product-dialog.component';
 import { UpdatedProductDialogComponent } from './updated-product-dialog/updated-product-dialog.component';
+import { FormsModule } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
  
 
 @NgModule({
@@ -53,7 +55,9 @@ import { UpdatedProductDialogComponent } from './updated-product-dialog/updated-
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxScannerQrcodeModule
+    NgxScannerQrcodeModule,
+    FormsModule,
+    MatRadioModule
     
   ],
 })

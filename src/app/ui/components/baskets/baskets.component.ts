@@ -5,6 +5,7 @@ import { BaseComponent, NgxSpinerType } from 'src/app/base/base.component';
 import { List_Basket_Item } from 'src/app/contracts/basket/list_basket_item';
 import { Update_Basket_Item } from 'src/app/contracts/basket/update_basket_item';
 import { Create_Order } from 'src/app/contracts/order/create_order';
+import { Single_Order } from 'src/app/contracts/order/single_order';
 import { BasketItemDeleteState, BasketItemRemoveDialogComponent } from 'src/app/dialogs/basket-item-remove-dialog/basket-item-remove-dialog.component';
 import { ShoppingCompleteDeleteState, ShoppingCompleteDialogComponent } from 'src/app/dialogs/shopping-complete-dialog/shopping-complete-dialog.component';
 import { DialogService } from 'src/app/services/common/dialog.service';
@@ -33,11 +34,18 @@ export class BasketsComponent extends BaseComponent implements OnInit {
     
   }
   basketItems:List_Basket_Item[];
+  totalPrice:number;
+  x:any
 
   async ngOnInit():Promise<void> {
    this.showNgxSpinner(NgxSpinerType.BallAtom)
    this.basketItems = await this.basketService.get(); //her yüklemede istek yapılması lazım dinamikcomponenet teknik ile yapılcak
    this.hideNgxSpinner(NgxSpinerType.BallAtom);
+
+   this.totalPrice = this.basketItems
+   .map((basketItem,index) => basketItem.price * basketItem.quantity)
+   .reduce((price,current) => price + current);
+
   }
 
   async changeQuantity(object:any){
@@ -86,6 +94,6 @@ export class BasketsComponent extends BaseComponent implements OnInit {
         this.router.navigate(["/"]);
       }
     });
-   
+  
   }
 }

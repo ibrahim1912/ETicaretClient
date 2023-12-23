@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Ürün Güncelleme!</h1>
+<div mat-dialog-content>
+    <mat-form-field appearance="fill" class="product-create">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" #txtName>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill" class="product-create">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" min="0" value="0" #txtPrice>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill" class="product-create">
+        <mat-label>Stock</mat-label>
+        <input matInput type="number" min="0" value="0" #txtStock>
+      </mat-form-field>
+  
+</div>
+<!-- <div mat-dialog-actions>
+ 
+  <button mat-button mat-raised-button class="btn" color="primary" (click)="update(txtName,txtPrice,txtStock)">Ürünü Güncelle</button>
+  <button mat-button (click)="close()">İptal</button>
+</div> -->
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Kapat</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="updated(txtName,txtPrice,txtStock)" 
+   
+  >Ürünü Güncelle</button>
+</mat-dialog-actions>
+
+<!-- <h2 mat-dialog-title>Ürün Güncelleme</h2> -->
+ 
+ 
+  

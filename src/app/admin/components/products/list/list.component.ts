@@ -6,6 +6,7 @@ import { BaseComponent, NgxSpinerType } from 'src/app/base/base.component';
 import {  List_Product } from 'src/app/contracts/list_product';
 import { QrcodeDialogComponent } from 'src/app/dialogs/qrcode-dialog/qrcode-dialog.component';
 import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
+import { UpdateProductDialogComponent } from 'src/app/dialogs/update-product-dialog/update-product-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
@@ -55,7 +56,7 @@ export class ListComponent  extends BaseComponent implements OnInit {
 
   // }
 
-  addProductImages(id:string){
+  addProductImages(id:string){ //id=> productIdsi
     this.dialogService.openDialog({
       componentType :SelectProductImageDialogComponent,
       data:id,
@@ -81,6 +82,17 @@ export class ListComponent  extends BaseComponent implements OnInit {
       data:productId,
       afterClosed:() => {},
      
+    });
+  }
+
+  updateProduct(id:string){
+    this.dialogService.openDialog({
+      componentType:UpdateProductDialogComponent,
+      data:id,
+      options:{
+        width:"800px"
+      },
+      afterClosed:() =>{}
     });
   }
 }

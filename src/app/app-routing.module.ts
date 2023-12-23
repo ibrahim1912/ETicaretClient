@@ -117,6 +117,14 @@ const routes: Routes = [
       ),
 
   },
+  {
+    path: 'u-user',
+    loadChildren: () =>
+      import('./ui/components/user/user.module').then(
+        (module) => module.UserModule
+      ),
+
+  },
 ];
 
 @NgModule({

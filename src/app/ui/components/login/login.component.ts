@@ -19,7 +19,8 @@ export class LoginComponent extends BaseComponent implements OnInit {
   constructor(private userAuthService: UserAuthService, spinner: NgxSpinnerService,
     private authService:AuthService,private actiavedRoute:ActivatedRoute,
     private router:Router,
-    private socialAuthService:SocialAuthService) {
+    private socialAuthService:SocialAuthService,
+    private userService:UserService) {
       super(spinner);
       this.socialAuthService.authState.subscribe(async (user:SocialUser) => {
         this.showNgxSpinner(NgxSpinerType.BallAtom);
@@ -45,6 +46,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     //this.showNgxSpinner(NgxSpinerType.BallSpinFadeRotating);
+ 
   }
 
   async login(userNameOrEmail: string, password: string) {

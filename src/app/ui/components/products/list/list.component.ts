@@ -152,8 +152,6 @@ export class ListComponent extends BaseComponent  implements OnInit {
 
       this.products = data.products;
 
-      
-
       this.products = this.products.map<List_Product>(p => {
 
         const listProduct: List_Product = {
@@ -169,8 +167,7 @@ export class ListComponent extends BaseComponent  implements OnInit {
           
         };
         
-        // console.log(listProduct.productImageFiles);
-        // console.log(listProduct.productImageFiles.map(p => p.showCase));
+         
          
         
 

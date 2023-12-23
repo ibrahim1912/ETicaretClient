@@ -9,6 +9,8 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { UpdatePasswordComponent } from './update-password/update-password.component';
 import { PasswordResetModule } from './password-reset/password-reset.module';
 import { UpdatePasswordModule } from './update-password/update-password.module';
+import { UserComponent } from './user/user.component';
+import { UserModule } from './user/user.module';
 
  
 
@@ -29,7 +31,8 @@ import { UpdatePasswordModule } from './update-password/update-password.module';
 
   ],
   exports:[
-    BasketsModule //ana sayfada app-basket kullanmak için bunu ekledik
+    BasketsModule, //ana sayfada app-basket kullanmak için bunu ekledik,
+    UserModule
   ]
 })
 export class ComponentsModule { }

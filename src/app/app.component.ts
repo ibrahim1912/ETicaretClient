@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClientService } from './services/common/http-client.service';
 import { ComponentType, DinamicLoadComponentService } from './services/common/dinamic-load-component.service';
 import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-component.directive';
+import { UserService } from './services/common/models/user.service';
+import { state } from '@angular/animations';
 
 
 declare var $: any;
@@ -23,12 +25,13 @@ export class AppComponent {
 
   @ViewChild(DynamicLoadComponentDirective, {static : true})
   dynamicLoadComponentDirective:DynamicLoadComponentDirective;
-
+ 
   constructor(
     private toastrService: CustomToastrService,
     public authService: AuthService,
     private router: Router,
     private httpClientService: HttpClientService,
+    public userService:UserService,
     private dynamicLoadComponentService:DinamicLoadComponentService
    
   ) {
@@ -42,8 +45,11 @@ export class AppComponent {
     // }).subscribe(data => {
     //   debugger
     // });
-
+ 
     authService.idendityCheck();
+    // authService.getUserName();
+     
+
   }
   signOut() {
     localStorage.removeItem('accessToken');
@@ -62,5 +68,18 @@ export class AppComponent {
       this.dynamicLoadComponentDirective.viewcontainerRef) 
   
   }
+
+  removeAccessToken(){
+    localStorage.removeItem('accessToken');
+    sessionStorage.clear();
+  }
+
+  updateUser(){
+    this.dynamicLoadComponentService.loadComponent(ComponentType.UserComponent,
+      this.dynamicLoadComponentDirective.viewcontainerRef) 
+  }
+
+  
+  
 
 }

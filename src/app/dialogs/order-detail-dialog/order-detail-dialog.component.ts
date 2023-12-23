@@ -60,7 +60,11 @@ export class OrderDetailDialogComponent extends BaseDialog<OrderDetailDialogComp
           positon:ToastrPosition.BottomRight
         });
 
-        window.location.reload();
+        setTimeout(() => {
+           window.location.reload();
+           
+        }, 1000); 
+        
         
       }
     });

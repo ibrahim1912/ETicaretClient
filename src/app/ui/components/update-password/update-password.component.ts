@@ -37,8 +37,7 @@ export class UpdatePasswordComponent extends BaseComponent implements OnInit {
         this.state = await this.userAuthService.verifyResetToken(resetToken,userId, () => {
           this.hideNgxSpinner(NgxSpinerType.BallAtom);
         })
-
-        debugger
+ 
       }
     });
   }

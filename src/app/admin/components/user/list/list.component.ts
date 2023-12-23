@@ -62,7 +62,8 @@ export class ListComponent extends BaseComponent implements OnInit{
       componentType:AuthorizeUserDialogComponent,
       data:id,
       options:{
-        width:"750px"
+        width:"500px",
+        height:"600px"
       },
       afterClosed:() =>{
         this.alertify.message("Roller başarıyla atanmıştır!", {

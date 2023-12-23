@@ -25,22 +25,28 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="login"
-                            *ngIf="!authService.isAuthenticated"
+                            *ngIf="!authService.isAuthenticated "
                             >Giriş Yap</a>
                             
                         </li>
+                        <!-- && !authService.roleController -->
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"  
                             style="color: red; cursor: pointer;"
                             (click)="signOut()"
-                            *ngIf="authService.isAuthenticated"
+                           *ngIf="authService.isAuthenticated "  
                             >Çıkış Yap</a>
                         </li>
                         <li>
                             <a routerLink="admin" class="btn btn-outline-success" type="submit"
-                            *ngIf="authService.isAuthenticated"
+                            *ngIf="authService.isAuthenticated && authService.roleController"
                             >Yönetim Paneli</a>
                         </li>
+
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" routerLink="" 
+                            *ngIf="authService.isState" >rol varsa göster {{authService.isState}}</a>
+                        </li> -->
                        
                     </ul>
 
@@ -48,13 +54,24 @@
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                       </form> -->
-                  <div class="d-flex">
-                    <button class="btn btn-outline-custom" data-bs-toggle="modal" data-bs-target="#basketModal"
-                    type="submit" (click)="loadComponent()">Sepet</button>
+                  <div  class="d-flex" >
+                    <!-- <button class="btn btn-outline-custom" data-bs-toggle="modal" data-bs-target="#basketModal"
+                    type="submit" (click)="loadComponent()">Sepet</button> -->
+                    <img *ngIf="authService.isAuthenticated" type="submit" data-bs-toggle="modal"  data-bs-target="#basketModal" (click)="loadComponent()"
+                     style="cursor: pointer; "  src="../../../../../assets/cart-basket.png"   >
                   </div>
+
+                  <div  *ngIf="authService.isAuthenticated" class="d-flex test" style="margin-top: 35px;" >
+                    <img   type="submit" data-bs-toggle="modal"  data-bs-target="#basketModal" (click)="updateUser()"
+                  style="cursor: pointer; width: 40px; height: 40px; "   src="../../../../../assets/user.png"    >   
+               
+                 <p class="bold" style="margin-top: 8px; margin-left: 6px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"  >{{authService.userName}}</p> 
+                </div>
+                
                 </div>
             </div>
         </nav>
+       
 
     </div>
     <div class="col-md-2"></div>
@@ -73,8 +90,14 @@
 
 <!-- <app-baskets></app-baskets> -->
 <!--doma çagırmadıgın sürece yüklenmez-->
-<div class="modal fade" id="basketModal" tabindex="-1"   aria-hidden="true">
+<!-- <div class="modal fade" id="basketModal" tabindex="-1"   aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <ng-template appDynamicLoadComponent=""></ng-template> 
+    </div>
+</div> -->
+<div class="modal fade" id="basketModal" tabindex="-1" aria-hidden="true"  >
     <div class="modal-dialog modal-xl">
         <ng-template appDynamicLoadComponent=""></ng-template> 
     </div>
 </div>
+

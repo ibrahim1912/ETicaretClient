@@ -50,7 +50,7 @@
       <ng-container matColumnDef="edit">
         <th  style="width: 25;" mat-header-cell *matHeaderCellDef></th>
         <td style="padding-left: 2.3%;" mat-cell *matCellDef="let element"> <img style="cursor: pointer;"  src="../../../../../assets/edit.png" 
-          width="20" height="20"> </td>
+          width="20" height="20" (click)="updateProduct(element.id)" > </td>
       </ng-container>
     
       <ng-container matColumnDef="delete">

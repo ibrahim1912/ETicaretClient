@@ -11,10 +11,13 @@ export class DinamicLoadComponentService { //uygulama üzerüinde dinmamik olara
 
   async loadComponent(component:ComponentType,viewContainerRef: ViewContainerRef){
     let _component:any=null;
-
+    
     switch(component){
       case ComponentType.BasketsComponent:
         _component = (await import("../../ui/components/baskets/baskets.component")).BasketsComponent;
+        break;
+      case ComponentType.UserComponent:
+        _component = (await import("../../ui/components/user/user.component")).UserComponent;
         break;
     }
 
@@ -25,5 +28,6 @@ export class DinamicLoadComponentService { //uygulama üzerüinde dinmamik olara
 }
 
 export enum ComponentType{
-  BasketsComponent
+  BasketsComponent,
+  UserComponent
 }
