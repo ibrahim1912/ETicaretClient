@@ -36,7 +36,7 @@ import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-
     JwtModule.forRoot({
       config:{
         tokenGetter: () => localStorage.getItem("accessToken"),
-        allowedDomains:["localhost:7114"],
+        allowedDomains:["localhost:44337"],
       }
     }),
    SocialLoginModule,
@@ -44,8 +44,8 @@ import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-
    
   ],
   providers: [
-    {provide: "baseUrl",useValue:"https://localhost:7114/api", multi:true},
-    {provide: "baseSignalRUrl",useValue:"https://localhost:7114/", multi:true},
+    {provide: "baseUrl",useValue:"https://localhost:44337/api", multi:true},
+    {provide: "baseSignalRUrl",useValue:"https://localhost:44337/", multi:true},
     {
       provide: "SocialAuthServiceConfig",
       useValue: {
